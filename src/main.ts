@@ -7,7 +7,7 @@ import { importProvidersFrom } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app/app.component';
-import { routes } from './app/app-routing.module'; 
+import { Routes } from '@angular/router';
 import { environment } from './app/environment/environment'; 
 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -15,7 +15,6 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),
     provideHttpClient(),
     importProvidersFrom(FormsModule, ReactiveFormsModule),
 

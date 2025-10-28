@@ -1,24 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Auth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from '@angular/fire/auth';
+
+const TOKEN_KEY = 'app_token';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private auth: Auth, private router: Router) {} // injeta aqui
-
-  login(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password);
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem(TOKEN_KEY);
   }
-
-  logout() {
-    return signOut(this.auth).then(() => this.router.navigate(['/login']));
+  saveToken(token: string): void {
+    localStorage.setItem(TOKEN_KEY, token);
   }
-
-  getUser(): Observable<User | null> {
-    return new Observable(subscriber => {
-      const unsubscribe = onAuthStateChanged(this.auth, user => subscriber.next(user));
-      return { unsubscribe };
-    });
+  getToken(): string | null {
+    return localStorage.getItem(TOKEN_KEY);
+  }
+  logout(): void {
+    localStorage.removeItem(TOKEN_KEY);
   }
 }

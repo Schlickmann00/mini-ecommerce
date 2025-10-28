@@ -1,15 +1,36 @@
-// src/app/app.routes.ts
-import { Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home.page';
-import { LoginComponent } from './components/login/login.component';
-import { CartComponent } from './components/cart/cart.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { AuthGuard } from './guards/auth.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard'; 
+import { LoginRedirectGuard } from './guards/login-redirect.guard';
+import { LoginPageComponent } from './components/login-page/login-page.component'; 
 
-export const routes: Routes = [
-  { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' }
+const routes: Routes = [
+  // Nunca proteja /login com AuthGuard
+  { path: 'login', component: LoginPageComponent, canActivate: [LoginRedirectGuard] },
+
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./features/home/home-page.component').then(m => m.HomePageComponent),
+      },
+      {
+        path: 'carrinho',
+        loadComponent: () =>
+          import('./features/cart/cart-page.component').then(m => m.CartPageComponent),
+      },
+      { path: '', pathMatch: 'full', redirectTo: 'home' },
+    ],
+  },
+
+  { path: '**', redirectTo: '' },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' })],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
