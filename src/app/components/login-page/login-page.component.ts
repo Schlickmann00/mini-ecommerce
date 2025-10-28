@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, finalize, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
@@ -14,19 +14,20 @@ export class LoginPageComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
   loading = false;
   errorMsg = '';
-
-  form = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    senha: ['', [Validators.required, Validators.minLength(3)]],
-    manterLogado: [true],
-  });
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private auth: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(3)]],
+      manterLogado: [true],
+    });
+  }
 
   onSubmit(): void {
     if (this.form.invalid) return;
@@ -45,6 +46,7 @@ export class LoginPageComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next(); this.destroy$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

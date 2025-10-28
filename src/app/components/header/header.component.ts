@@ -1,23 +1,31 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // necessário para *ngIf
-import { AuthService } from '../../core/auth.service';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
-  standalone: true,
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  imports: [CommonModule] // <- adiciona CommonModule para *ngIf
+  standalone: true,
+  imports: [CommonModule], // necessário para ngIf e async
+  template: `
+    <header>
+      <nav>
+        <!-- Links de navegação -->
+        <a routerLink="/">Home</a>
+        <!-- Ajuste caso não tenha carrinho -->
+        <!-- <a routerLink="/carrinho">Carrinho</a> -->
+
+        <!-- Botão de logout mostrado apenas se houver usuário logado -->
+        <button *ngIf="auth.getUser() | async" (click)="logout()">Sair</button>
+      </nav>
+    </header>
+  `
 })
 export class HeaderComponent {
+  constructor(public auth: AuthService, private router: Router) {}
 
-  constructor(
-    public auth: AuthService, // precisa ser público para o template acessar
-    private router: Router
-  ) {}
-
-  logout() {
-    this.auth.logout();          // método do AuthService
-    this.router.navigate(['/']); // redireciona para a home
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

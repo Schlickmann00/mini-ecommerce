@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard'; 
+import { AuthGuard } from './guards/auth.guard';
 import { LoginRedirectGuard } from './guards/login-redirect.guard';
-import { LoginPageComponent } from './components/login-page/login-page.component'; 
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { HomePageComponent } from './pages/home.page';
 
 const routes: Routes = [
   // Nunca proteja /login com AuthGuard
@@ -12,16 +13,7 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     children: [
-      {
-        path: 'home',
-        loadComponent: () =>
-          import('./features/home/home-page.component').then(m => m.HomePageComponent),
-      },
-      {
-        path: 'carrinho',
-        loadComponent: () =>
-          import('./features/cart/cart-page.component').then(m => m.CartPageComponent),
-      },
+      { path: 'home', component: HomePageComponent },
       { path: '', pathMatch: 'full', redirectTo: 'home' },
     ],
   },
