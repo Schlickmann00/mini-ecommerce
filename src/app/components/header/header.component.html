@@ -1,0 +1,10 @@
+<header>
+  <nav>
+    <!-- Links de navegação -->
+    <a routerLink="/">Home</a>
+    <a routerLink="/cart">Carrinho</a>
+
+    <!-- Botão de logout mostrado apenas se houver usuário logado -->
+    <button *ngIf="auth.getUser() | async" (click)="logout()">Sair</button>
+  </nav>
+</header>

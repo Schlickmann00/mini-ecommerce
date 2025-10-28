@@ -1,0 +1,9 @@
+<div class="cart">
+  <h2>Carrinho</h2>
+  <div *ngFor="let item of cart">
+    {{ item.name }} - R$ {{ item.price }}
+    <button (click)="remove(item.id!)">Remover</button>
+  </div>
+  <p>Total: R$ {{ cartService.getTotal() }}</p>
+  <a routerLink="/checkout">Finalizar Compra</a>
+</div>
