@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProductListComponent } from '../components/product-list/product-list.component';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.page.html', // aponta para o arquivo HTML
+  standalone: true,
+  imports: [CommonModule, ProductListComponent],
+  templateUrl: './home.page.html',
 })
 export class HomePageComponent implements OnInit {
-  total = 0; // exemplo de variável que você pode usar no template
+  total = 0;
 
   constructor() {}
 
