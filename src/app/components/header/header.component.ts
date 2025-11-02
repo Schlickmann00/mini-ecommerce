@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule], // necessário para ngIf e async
+  imports: [CommonModule, RouterLink], // necessário para ngIf e async
   template: `
     <header>
       <nav>
         <!-- Links de navegação -->
-        <a routerLink="/">Home</a>
+        <a routerLink="/home">Home</a>
         <!-- Ajuste caso não tenha carrinho -->
         <!-- <a routerLink="/carrinho">Carrinho</a> -->
 
