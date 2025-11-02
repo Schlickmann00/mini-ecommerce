@@ -13,7 +13,6 @@ import { AuthGuard } from './app/guards/auth.guard';
 import { LoginRedirectGuard } from './app/guards/login-redirect.guard';
 import { LoginPageComponent } from './app/components/login-page/login-page.component';
 import { HomePageComponent } from './app/pages/home.page';
-
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 
