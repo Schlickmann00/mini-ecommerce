@@ -1,70 +1,77 @@
-Perfeito! Aqui está um **README completo pronto para colar** no seu repositório:
+Beleza! Aqui está uma versão **bem explicada e detalhada**, pronta para colar no GitHub. Inclui descrições de cada seção, instruções claras e contexto sobre o projeto:
 
 ````markdown
 # MiniEcommerce
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+MiniEcommerce é um projeto acadêmico desenvolvido com Angular que simula um sistema de e-commerce. Ele inclui funcionalidades básicas como catálogo de produtos, carrinho de compras, checkout e, opcionalmente, autenticação de usuários via Firebase.
 
-## Development server
+O objetivo é demonstrar conceitos de desenvolvimento web com Angular, manipulação de dados, integração com backend e boas práticas de organização de código.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## Tecnologias utilizadas
+
+- **Angular 20.3.2** – Framework principal para desenvolvimento frontend.
+- **TypeScript** – Linguagem principal para lógica e tipagem.
+- **HTML / CSS / SCSS** – Estrutura e estilo das páginas.
+- **Firebase** (opcional) – Para autenticação e persistência de dados.
+- Outras dependências conforme listadas no `package.json`.
+
+---
+
+## Funcionalidades principais
+
+- Exibição de produtos em catálogo.
+- Visualização de detalhes de cada produto.
+- Adição e remoção de itens do carrinho.
+- Simulação de checkout.
+- Autenticação de usuários (opcional, via Firebase).
+- Painel administrativo básico (dependendo da implementação).
+
+---
+
+## Instalação e execução local
+
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/Schlickmann00/mini-ecommerce.git
+   cd mini-ecommerce
 ````
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+2. **Instale as dependências**
 
-## Code scaffolding
+   ```bash
+   npm install
+   ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+3. **Execute o servidor de desenvolvimento**
 
-```bash
-ng generate component component-name
-```
+   ```bash
+   ng serve
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+4. **Acesse a aplicação**
+   Abra o navegador e vá para: `http://localhost:4200/`.
+   A aplicação irá recarregar automaticamente sempre que você modificar algum arquivo fonte.
 
-```bash
-ng generate --help
-```
+5. **Build para produção** (opcional)
 
-## Building
+   ```bash
+   ng build
+   ```
 
-To build the project run:
+   O build de produção será gerado na pasta `dist/`, otimizado para desempenho.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Project Structure
+## Estrutura do projeto
 
 ```
 /public
 /src
-  /app
-  /assets
-  /environments
+  /app          # Componentes, serviços, módulos
+  /assets       # Imagens, ícones e arquivos estáticos
+  /environments # Configurações de ambiente
 .gitignore
 package.json
 angular.json
@@ -72,22 +79,51 @@ tsconfig.json
 firebase.json
 ```
 
-## Technologies Used
+---
 
-* Angular
-* TypeScript
-* HTML, CSS
-* Firebase (optional, if configured)
+## Comandos úteis do Angular CLI
 
-## Contributing
+* **Gerar novo componente**
 
-Fork the repository, create a branch, make commits, and open a pull request.
+  ```bash
+  ng generate component component-name
+  ```
+* **Gerar outros schematics**
 
-## Author
+  ```bash
+  ng generate --help
+  ```
+* **Executar testes unitários**
+
+  ```bash
+  ng test
+  ```
+* **Executar testes end-to-end**
+
+  ```bash
+  ng e2e
+  ```
+
+Para mais detalhes, consulte [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli).
+
+---
+
+## Contribuição
+
+Contribuições são bem-vindas!
+
+1. Faça um fork do repositório.
+2. Crie uma branch para a sua feature ou correção:
+
+   ```bash
+   git checkout -b feature/nova-feature
+   ```
+3. Faça commits claros das alterações realizadas.
+4. Abra um Pull Request descrevendo suas mudanças.
+
+---
+
+## Autor
 
 * Schlickmann00
-
-```
-
-Se quiser, posso fazer **uma versão ainda mais “bonita”**, com badges de build, versão e licença, pronta para colar direto no GitHub. Quer que eu faça isso também?
 ```
