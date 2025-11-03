@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
 import { Product } from '../models/product.model';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: Firestore) {}
 
   getProducts(): Observable<Product[]> {
-    return this.firestore.collection<Product>('products').valueChanges({ idField: 'id' });
+    const productsCollection = collection(this.firestore, 'products');
+    return collectionData(productsCollection, { idField: 'id' }) as Observable<Product[]>;
   }
 
   addProduct(product: Product) {
-    return this.firestore.collection('products').add(product);
+    const productsCollection = collection(this.firestore, 'products');
+    return addDoc(productsCollection, product);
   }
 }
