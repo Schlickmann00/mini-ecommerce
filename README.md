@@ -1,4 +1,3 @@
-Beleza! Aqui está uma versão **bem explicada e detalhada**, pronta para colar no GitHub. Inclui descrições de cada seção, instruções claras e contexto sobre o projeto:
 
 ````markdown
 # MiniEcommerce
