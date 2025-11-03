@@ -28,10 +28,25 @@ import { Subject, takeUntil } from 'rxjs';
     }
 
     .logo {
-      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .logo img {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: transparent;
+    }
+
+    .logo-title {
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--primary-color);
-      cursor: pointer;
+      line-height: 1;
     }
 
     .nav-links {
@@ -102,7 +117,10 @@ import { Subject, takeUntil } from 'rxjs';
   template: `
     <header>
       <nav>
-        <div class="logo" routerLink="/home">🛍️ Mini E-commerce</div>
+        <div class="logo" routerLink="/home">
+          <img [src]="logoSrc" (error)="onLogoError($event)" alt="Gustavo Store" />
+          <span class="logo-title">Gustavo Store</span>
+        </div>
         
         <div class="nav-links">
           <a routerLink="/home" class="nav-link">Home</a>
@@ -126,6 +144,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   cartCount = 0;
+  logoSrc = 'assets/logo.png';
 
   constructor(
     public auth: AuthService, 
@@ -149,5 +168,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/login']);
+  }
+
+  onLogoError(evt: Event) {
+    const img = evt.target as HTMLImageElement;
+    if (this.logoSrc === 'assets/logo.png') {
+      this.logoSrc = 'assets/logo.jpg';
+    } else if (this.logoSrc === 'assets/logo.jpg') {
+      this.logoSrc = 'assets/logo.svg';
+    } else {
+      // Fallback: remove imagem e mantém apenas o título
+      img.style.display = 'none';
+    }
   }
 }

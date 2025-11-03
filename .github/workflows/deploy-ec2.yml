@@ -1,0 +1,37 @@
+name: Deploy EC2
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: |
+            ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Add EC2 to known_hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Sync repo to EC2 (optional; requires git on EC2)
+        run: |
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "set -e; \ 
+            if [ ! -d '${{ secrets.EC2_PATH }}' ]; then \ 
+              git clone ${{ github.server_url }}/${{ github.repository }} '${{ secrets.EC2_PATH }}'; \ 
+            fi; \ 
+            cd '${{ secrets.EC2_PATH }}'; \ 
+            git fetch --all; git checkout main; git pull --rebase"
+
+      - name: Run deploy script on EC2
+        run: |
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd '${{ secrets.EC2_PATH }}' && bash deploy/ec2-deploy.sh"
+
+

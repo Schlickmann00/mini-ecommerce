@@ -5,5 +5,8 @@
       ➕ Adicionar Produtos
     </a>
   </div>
-  <app-product-list></app-product-list>
+  <div class="layout">
+    <app-sidebar-categories (categoryChange)="onCategoryChange($event)"></app-sidebar-categories>
+    <app-product-list [category]="selectedCategory"></app-product-list>
+  </div>
 </div>

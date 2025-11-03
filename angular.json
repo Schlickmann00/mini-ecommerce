@@ -17,6 +17,14 @@
             "index": "src/index.html",
             "polyfills": [],
             "tsConfig": "tsConfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/"
+              },
+              "src/favicon.ico"
+            ],
             "styles": [
               "src/custom-theme.scss",
               "src/styles.css"

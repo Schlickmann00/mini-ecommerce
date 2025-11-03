@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ProductListComponent } from '../components/product-list/product-list.component';
+import { SidebarCategoriesComponent } from '../components/sidebar-categories/sidebar-categories.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ProductListComponent, RouterLink],
+  imports: [CommonModule, ProductListComponent, SidebarCategoriesComponent, RouterLink],
   styles: [`
     .home-container {
       max-width: 1200px;
@@ -72,13 +73,21 @@ import { ProductListComponent } from '../components/product-list/product-list.co
         justify-content: center;
       }
     }
+
+    .layout { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; }
+    @media (max-width: 992px) { .layout { grid-template-columns: 1fr; } }
   `],
   templateUrl: './home.page.html',
 })
 export class HomePageComponent implements OnInit {
   total = 0;
+  selectedCategory: string | null = null;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  onCategoryChange(cat: string | null) {
+    this.selectedCategory = cat;
+  }
 }

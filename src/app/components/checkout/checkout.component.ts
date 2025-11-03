@@ -4,6 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { CartService } from '../../core/cart.service';
 import { PixService } from '../../core/pix.service';
 import { Product } from '../../models/product.model';
+import { Order } from '../../models/order.model';
+import { OrderService } from '../../core/order.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -314,6 +316,9 @@ import { Subject, takeUntil } from 'rxjs';
               <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
                 Após o pagamento, seu pedido será processado automaticamente.
               </p>
+              <button class="copy-button" style="margin-right: 1rem;" (click)="confirmOrder()">
+                ✅ Confirmar Pedido
+              </button>
               <button class="back-button" routerLink="/home">
                 ← Voltar para Home
               </button>
@@ -345,7 +350,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     public pixService: PixService,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService
   ) {}
 
   ngOnInit() {
@@ -393,5 +399,23 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.copied = false;
       }, 3000);
     });
+  }
+
+  confirmOrder() {
+    if (this.cart.length === 0 || this.total <= 0) {
+      return;
+    }
+    const order: Order = {
+      id: (typeof globalThis !== 'undefined' && (globalThis as any).crypto && typeof (globalThis as any).crypto.randomUUID === 'function')
+        ? (globalThis as any).crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      userId: 'anônimo',
+      products: this.cart,
+      total: this.total,
+      date: new Date()
+    };
+    this.orderService.setOrder(order);
+    this.cartService.clearCart();
+    this.router.navigate(['/order-confirmation']);
   }
 }

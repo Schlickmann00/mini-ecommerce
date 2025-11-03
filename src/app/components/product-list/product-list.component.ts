@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../core/product.service';
@@ -111,7 +111,8 @@ import { ProductCardComponent } from '../product-card/product-card.component';
     </div>
   `
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnChanges {
+  @Input() category: string | null = null;
   products: Product[] = [];
   loading = true;
 
@@ -128,7 +129,8 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (res) => {
         console.log('Produtos carregados:', res);
-        this.products = res || [];
+        const all = res || [];
+        this.products = this.category ? all.filter(p => (p.category || 'Outros') === this.category) : all;
         this.loading = false;
         
         if (this.products.length === 0) {
@@ -144,5 +146,11 @@ export class ProductListComponent implements OnInit {
         alert('Erro ao carregar produtos. Verifique sua conexão com o Firebase e as regras de segurança do Firestore.');
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['category'] && !changes['category'].firstChange) {
+      this.loadProducts();
+    }
   }
 }

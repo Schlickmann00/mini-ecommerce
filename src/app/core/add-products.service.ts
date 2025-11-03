@@ -10,6 +10,7 @@ export class AddProductsService {
     const products: Omit<Product, 'id'>[] = [
       {
         name: 'MacBook Pro 14" M3',
+        category: 'Notebooks',
         description: 'Notebook Apple com chip M3, ideal para profissionais. Tela Retina Liquid XDR de 14 polegadas com tecnologia Mini-LED. Performance excepcional para criação de conteúdo, programação e edição de vídeo.',
         price: 14999.00,
         image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400',
@@ -25,6 +26,7 @@ export class AddProductsService {
       },
       {
         name: 'iPhone 15 Pro Max',
+        category: 'Smartphones',
         description: 'Smartphone Apple com tela Super Retina XDR de 6.7", câmera de 48MP com sistema avançado de fotografia. Chip A17 Pro com arquitetura de 3nm. Design em titânio premium.',
         price: 9999.00,
         image: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400',
@@ -40,6 +42,7 @@ export class AddProductsService {
       },
       {
         name: 'Dell XPS 13 Plus',
+        category: 'Notebooks',
         description: 'Ultrabook Dell com design minimalista e performance de alta classe. Tela OLED de 13.4" com resolução 4K. Ideal para produtividade e criatividade.',
         price: 8999.00,
         image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400',
@@ -55,6 +58,7 @@ export class AddProductsService {
       },
       {
         name: 'Samsung Galaxy S24 Ultra',
+        category: 'Smartphones',
         description: 'Smartphone Samsung flagship com tela Dynamic AMOLED 2X de 6.8", câmera de 200MP com zoom espacial de 100x. S Pen integrada para produtividade.',
         price: 8499.00,
         image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400',
@@ -70,6 +74,7 @@ export class AddProductsService {
       },
       {
         name: 'iPad Pro 12.9" M2',
+        category: 'Tablets',
         description: 'Tablet Apple com chip M2, tela Liquid Retina XDR de 12.9". Suporte a Apple Pencil e Magic Keyboard. Potência profissional em formato portátil.',
         price: 7999.00,
         image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400',
@@ -85,6 +90,7 @@ export class AddProductsService {
       },
       {
         name: 'PlayStation 5',
+        category: 'Consoles',
         description: 'Console de videogame Sony PS5 com leitor de disco Blu-ray Ultra HD. Controle DualSense com feedback háptico avançado. Performance de próxima geração.',
         price: 3999.00,
         image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400',
@@ -100,6 +106,7 @@ export class AddProductsService {
       },
       {
         name: 'AirPods Pro 2',
+        category: 'Acessorios',
         description: 'Fones de ouvido Apple com cancelamento de ruído ativo personalizado, chip H2, áudio espacial e resistência à água IPX4.',
         price: 2499.00,
         image: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=400',
@@ -115,6 +122,7 @@ export class AddProductsService {
       },
       {
         name: 'Monitor LG UltraWide 34"',
+        category: 'Monitores',
         description: 'Monitor curvado LG 34" com resolução 4K UHD, painel IPS, suporte HDR e taxa de atualização de 144Hz com FreeSync Premium.',
         price: 3499.00,
         image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400',
@@ -130,6 +138,7 @@ export class AddProductsService {
       },
       {
         name: 'Teclado Mecânico Logitech MX',
+        category: 'Perifericos',
         description: 'Teclado mecânico sem fio Logitech MX Keys com retroiluminação adaptativa, conexão Bluetooth e teclas de perfil baixo.',
         price: 899.00,
         image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400',
@@ -145,6 +154,7 @@ export class AddProductsService {
       },
       {
         name: 'Mouse Logitech MX Master 3S',
+        category: 'Perifericos',
         description: 'Mouse sem fio Logitech MX Master 3S com sensor de 8K DPI, carregamento USB-C e design ergonômico para produtividade.',
         price: 599.00,
         image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400',
@@ -160,6 +170,7 @@ export class AddProductsService {
       },
       {
         name: 'Webcam Logitech C920',
+        category: 'Perifericos',
         description: 'Webcam Full HD 1080p com microfone estéreo duplo, ajuste automático de luz e lentes de vidro HD.',
         price: 799.00,
         image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400',
@@ -175,6 +186,7 @@ export class AddProductsService {
       },
       {
         name: 'Apple Watch Series 9',
+        category: 'Wearables',
         description: 'Relógio inteligente Apple Watch Series 9 com GPS, tela sempre ligada, chip S9 SiP e recursos avançados de saúde e fitness.',
         price: 3499.00,
         image: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=400',
