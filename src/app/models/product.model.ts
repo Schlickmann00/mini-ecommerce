@@ -4,4 +4,10 @@ export interface Product {
   description: string;
   price: number;
   image: string;
+  colors?: string[]; // Cores disponíveis
+  memory?: string; // Memória RAM
+  storage?: string; // Capacidade de armazenamento
+  specifications?: { // Especificações adicionais
+    [key: string]: string;
+  };
 }
