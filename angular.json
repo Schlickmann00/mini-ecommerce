@@ -18,6 +18,7 @@
             "polyfills": [],
             "tsConfig": "tsConfig.app.json",
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "browser": "src/main.ts"

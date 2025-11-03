@@ -1,9 +1,28 @@
 <h2>Login</h2>
-<
-  <div><input type="email" placeholder="Email" formControlName="email" /></div>
-  <div><input type="password" placeholder="Senha" formControlName="senha" /></div>
-  <label><input type="checkbox" formControlName="manterLogado" /> Manter logado</label>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <input type="email" placeholder="Email" formControlName="email" />
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      Email inválido
+    </div>
+  </div>
+
+  <div>
+    <input type="password" placeholder="Senha" formControlName="senha" />
+    <div *ngIf="form.get('senha')?.invalid && form.get('senha')?.touched">
+      Senha inválida (mínimo 3 caracteres)
+    </div>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" formControlName="manterLogado" /> Manter logado
+    </label>
+  </div>
+
   <button type="submit" [disabled]="loading || form.invalid">Entrar</button>
-<
+</form>
+
 <p *ngIf="loading">Autenticando...</p>
-<p *ngIf="errorMsg">{{ errorMsg }}</p>
+<p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>

@@ -1,9 +1,9 @@
+// src/app/components/login-page/login-page.component.ts
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject, finalize, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -21,7 +21,6 @@ export class LoginPageComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private auth: AuthService,
     private router: Router
   ) {
@@ -37,15 +36,15 @@ export class LoginPageComponent implements OnDestroy {
     this.errorMsg = '';
     this.loading = true;
 
-    this.http.post<{ token: string }>('/api/auth/login', this.form.value)
-      .pipe(takeUntil(this.destroy$), finalize(() => (this.loading = false)))
-      .subscribe({
-        next: ({ token }) => {
-          this.auth.saveToken(token);
-          this.router.navigateByUrl('/home');
-        },
-        error: () => this.errorMsg = 'Falha no login. Verifique suas credenciais.',
-      });
+    const { email, senha } = this.form.value;
+
+    this.auth.login(email, senha)
+      .then(() => this.router.navigateByUrl('/home'))
+      .catch((err) => {
+        this.errorMsg = 'Falha no login. Verifique suas credenciais.';
+        console.error(err);
+      })
+      .finally(() => (this.loading = false));
   }
 
   ngOnDestroy(): void {

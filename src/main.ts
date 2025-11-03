@@ -5,9 +5,7 @@ import { provideRouter, Routes } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app/app.component';
-
 import { environment } from './app/environment/environment'; 
 import { AuthGuard } from './app/guards/auth.guard';
 import { LoginRedirectGuard } from './app/guards/login-redirect.guard';
